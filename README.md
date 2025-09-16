@@ -35,12 +35,7 @@ exit;
 ```
 
 * **Aggiornare file .env**
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=laravel_crypto
-DB_USERNAME=laravel
-DB_PASSWORD=123456
+<pre> ```env DB_CONNECTION=mysql DB_HOST=127.0.0.1 DB_PORT=3306 DB_DATABASE=laravel_crypto DB_USERNAME=laravel DB_PASSWORD=123456 ``` </pre>
 
 3. **Creazione migration + migration**
 ```bash
