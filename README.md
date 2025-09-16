@@ -13,3 +13,41 @@
 - Integrazione con API esterne.
 - Gestione di dati temporali e calcolo di statistiche.
 - Validazione dei dati tramite Form Request.
+
+## SETUP PROGETTO
+
+1. **Clonazione repo e installazione dipendenze**
+```bash
+git clone https://github.com/FabioCostantino84/crypto-dashboard.git
+cd crypto-dashboard
+composer install
+npm install
+```
+
+2. **Creazione DB**
+```bash
+mysql -u root -p
+CREATE DATABASE laravel_crypto;
+CREATE USER 'laravel'@'localhost' IDENTIFIED BY '123456';
+GRANT ALL PRIVILEGES ON laravel_crypto.* TO 'laravel'@'localhost';
+FLUSH PRIVILEGES;
+exit;
+```
+
+* **Aggiornare file .env**
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=laravel_crypto
+DB_USERNAME=laravel
+DB_PASSWORD=123456
+
+3. **Creazione migration + migration**
+```bash
+php artisan make:migration create_coins_table
+php artisan make:migration create_prices_table
+php artisan migrate
+```
+
+
+
