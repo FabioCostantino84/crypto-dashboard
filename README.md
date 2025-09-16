@@ -48,6 +48,18 @@ php artisan make:migration create_coins_table
 php artisan make:migration create_prices_table
 php artisan migrate
 ```
+4. **Creazione dei models**
+```bash
+php artisan make:model Coin
+php artisan make:model Price
+```
+
+5. **Creazione Controller**
+```bash
+php artisan make:controller CoinController --resource
+php artisan make:controller PriceController --resource
+```
+- L’opzione --resource crea già i metodi tipici (index, show, store, update, destroy).
 
 
 
