@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Services\CoinGeckoService;
 
 class CoinController extends Controller
 {
