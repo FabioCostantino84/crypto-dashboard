@@ -61,5 +61,9 @@ php artisan make:controller PriceController --resource
 ```
 - L’opzione --resource crea già i metodi tipici (index, show, store, update, destroy).
 
+6. **Aggiornamento .env e config/services.php**
+- COINGECKO_KEY=MIA_CHIAVE   
 
-
+- 'coingecko' => [
+        'key' => env('COINGECKO_KEY'),
+    ]

@@ -35,4 +35,8 @@ return [
         ],
     ],
 
+    'coingecko' => [
+        'key' => env('COINGECKO_KEY'),
+    ]
+
 ];
