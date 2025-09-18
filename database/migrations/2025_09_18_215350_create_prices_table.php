@@ -17,6 +17,9 @@ return new class extends Migration
             $table->date('date');
             $table->decimal('price', 18, 8);
             $table->timestamps();
+    
+            // vincolo di unicità: una sola riga per coin e giorno
+            $table->unique(['coin_id', 'date']);
         });
     }
 
