@@ -2,18 +2,44 @@
 
 namespace App\Services;
 
-class CoinGeckoService{
+use illuminate\Support\Facades\Http;
+
+class CoinGeckoService
+{
 
     /**
      * Cerco le criptovalute tramite l'API CoinGecko.
      *
-     * @param string $query Testo da cercare (nome o simbolo della coin, es. "bitcoin" o "btc").
+     * @param string $searchText Testo cercato (nome o simbolo della coin, es. "bitcoin" o "btc").
      * @return array Risultati normalizzati con id, name e symbol.
      */
-    public function getCoinsList(string $query): array
+    public function getCoinsList(string $searchText): array
     {
-        // qui devo fare la chimata http alla API di CoinGecko
-        return [];
+        $apiKey = config('services.coingecko.key'); // leggerà COINGECKO_KEY dal .env
+
+        $httpResponse = Http::withHeaders([
+            'x-cg-demo-api-key' => $apiKey,
+        ])->get('https://api.coingecko.com/api/v3/search', [
+            'query' => $searchText,
+        ]);
+
+        if ($httpResponse->failed()) {
+            return ['error' => 'Servizio CoinGecko non disponibile'];
+        }
+
+        $responseData = $httpResponse->json();
+
+        // Normalizzo prendendo solo i campi che mi servono
+        $normalizedCoins = [];
+        foreach ($responseData['coins'] ?? [] as $coinData) {
+            $normalizedCoins[] = [
+                'id' => $coinData['id'] ?? null,
+                'name' => $coinData['name'] ?? null,
+                'symbol' => $coinData['symbol'] ?? null,
+            ];
+        }
+
+        return ['items' => $normalizedCoins];
     }
 
     /**
