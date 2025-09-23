@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Http;
 
 class CoinGeckoService
 {
