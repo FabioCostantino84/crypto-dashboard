@@ -26,9 +26,32 @@ class CoinController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, CoinGeckoService $coinGecko)
     {
-        //
+        $searchText = trim(strtolower($request->input('query', $request->route('symbol'))));
+       // $searchText = strtolower(trim($request->input('query'))); // riga da tenere dopo aver creato il form
+
+
+        $results = $coinGecko->getCoinsList($searchText)['items'] ?? [];
+
+        if (empty($results)) {
+            return response()->json(['error ' => 'Coin non trovata'], 404);
+        }
+
+        $selectedCoin = null;
+
+        foreach ($results as $coinData) {
+            if (strtolower($coinData['symbol']) === $searchText) {
+                $selectedCoin = $coinData;
+                break;
+            }
+        }
+
+        if (!$selectedCoin) {
+            return response()->json(['error' => 'Nessuna coin trovata'], 404);
+        }
+
+        return response()->json(['selected' => $selectedCoin]);
     }
 
     /**
